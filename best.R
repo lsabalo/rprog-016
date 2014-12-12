@@ -4,9 +4,28 @@ best <- function(state, outcome) {
     
     ## Check that state and outcome are valid
     # If invalid state is given, then stop with message "invalid state"
+    valid_state <- FALSE
+    for (i in unique(file$State)) {
+        if (state == i) {
+            valid_state <- TRUE
+            break
+        }
+    }
+    if (!valid_state) {
+        stop("invalid state")
+    }
     
     # If invalid outcome is given, then stop with message "invalid outcome"
-    
+    valid_outcome <- FALSE
+    for (i in c("heart attack", "heart failure", "pneumonia")) {
+        if (outcome == i) {
+            valid_outcome <- TRUE
+            break
+        }
+    }
+    if (!valid_outcome) {
+        stop("invalid outome")
+    }
     
     ## Return hospital name in that state with lowest 30-day death
     col <- if (outcome == "heart attack") {
